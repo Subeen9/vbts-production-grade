@@ -18,58 +18,76 @@ const Students = ({ matchingId, data }) => {
         <div className="">
           <div>
             <div>
+            {data[1].t1key110 != "null" && 
               <p>
                 <strong>{data[0].t1key110}:&nbsp;</strong>
                 <span>{matchingId.t1key110}</span>
               </p>
+            }
             </div>
             <div>
+            {data[1].t1item120 != "null" && 
               <p>
                 <strong>{data[0].t1item120}:&nbsp;</strong>
                 <span>{matchingId.t1item120}</span>
               </p>
+               }
             </div>
             <div>
-              <p>
+            {data[1].t1item130 != "null" && 
+               <p>
                 <strong>{data[0].t1item130}:&nbsp;</strong>
                 <span>{matchingId.t1item130}</span>
               </p>
+            }
             </div>
             <div>
+            {data[1].t1item140 != "null" && 
               <p>
                 <strong>{data[0].t1item140}:&nbsp;</strong>
                 <span>{matchingId.t1item140}</span>
               </p>
+            }
             </div>
             <div>
+            {data[1].t1item150 != "null" && 
               <p>
                 <strong>{data[0].t1item150}:&nbsp;</strong>
                 <span>{matchingId.t1item150}</span>
               </p>
+            }
             </div>
             <div>
+            {data[1].t1item170 != "null" && 
               <p>
                 <strong>{data[0].t1item170}:&nbsp;</strong>
                 <span>{matchingId.t1item170}</span>
               </p>
+            }
             </div>
             <div>
+            {data[1].t1item180 != "null" && 
               <p>
                 <strong>{data[0].t1item180}:&nbsp;</strong>
                 <span>{matchingId.t1item180}</span>
               </p>
+            }
             </div>
             <div>
+            {data[1].t1item190 != "null" && 
               <p>
                 <strong>{data[0].t1item190}:&nbsp;</strong>
                 <span>{matchingId.t1item190}</span>
               </p>
+            }
             </div>
             <div>
+            {data[1].t1item200 != "null" && 
               <p>
                 <strong>{data[0].t1item200}:&nbsp;</strong>
                 <span>{matchingId.t1item200}</span>
               </p>
+            }
             </div>
           </div>
         </div>
