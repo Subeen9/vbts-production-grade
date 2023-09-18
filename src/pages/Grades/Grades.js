@@ -1,59 +1,51 @@
-import "bootstrap/dist/css/bootstrap.css";
-// import "./App.css";
-// import { Routes} from "react-router-dom";
-// import Login from "./pages/Login";
-import { useEffect, useState } from "react";
-// import { signOut } from "firebase/auth";
-// import { auth, db } from "./firebase";
-// import Landing from "./pages/Landing";
-// import Posts from "./pages/Posts";
-// import ViewPost from "./pages/ViewPost";
-// import "./auth/create-admin";
-import "react-toastify/dist/ReactToastify.css";
-// import { collection, getDocs } from "firebase/firestore";
-// import { ToastContainer, toast } from "react-toastify";
-// import SignUp from "./pages/SignUp";
-// import { database } from "./firebase";
-// import { ref, onValue } from 'firebase/database';
+import React from "react";
+import { Table } from "react-bootstrap";
 
-const Grades = () =>  {
-
-    // const [data, setData] = useState([]);
-    // const [grades,setGrades] = useState([]);
-
-    // useEffect(() => {
-    //     // Reference to your database path
-    //     const databaseRef = ref(database, '/vbts/app1/students');
-    //     const gradeDatabaseRef = ref(database,'vbts/app1/grades')
-    
-    //     // Fetch data from the database
-    //     onValue(databaseRef, (snapshot) => {
-    //       const fetchedData = snapshot.val();
-    //       if (fetchedData) {
-    //         setData(Object.values(fetchedData));
-    //       }
-    //     });
-    
-    //     onValue(gradeDatabaseRef, (snapshot) => {
-    //       const fetchedData = snapshot.val();
-    //       if (fetchedData) {
-    //         setGrades(Object.values(fetchedData));
-    //       }
-    //     });
-    
-    //     console.log('THE DATA IS ',data)
-    
-    //     return () => {
-    //       // Unsubscribe the event listener when component unmounts
-    //       // off(databaseRef);
-    //     };
-    //   }, [data]);
-
+const Grades = ({ matchingId, grades }) => {
   return (
-    <>
-    {/* {grades}{data} */}
-    </>
+    <div>
+      <div className="mt-4">
+        <table style={{border: '1px solid black'}}>
+          <thead  style={{border: '1px solid black'}}>
+            <tr className="table-tr" style={{ fontSize: "16px", color: "#777",border: '1px solid black' }}>
+              <th>
+                {grades[0].t2item110}
+              </th>
+              <th>
+                {grades[0].t2item130}
+              </th>
+              <th>{grades[0].t2item140}</th>
+              <th>{grades[0].t2item150}</th>
+              <th>{grades[0].t2item160}</th>
+              <th>{grades[0].t2item170}</th>
+              <th>{grades[0].t2item180}</th>
+              <th>{grades[0].t2item190}</th>
+            </tr>
+          </thead>
+          {grades.slice(2).map((grade) => {
+            return (
+              <tbody className="table-tbody">
+                {grade.t2key120 === matchingId.t1key110 ? (
+                  <tr style={{ fontSize: "15px",border: '1px solid black' }}>
+                    <td>{grade.t2item110}</td>
+                    <td>{grade.t2item130}</td>
+                    <td>{grade.t2item140}</td>
+                    <td>{grade.t2item150}</td>
+                    <td>{grade.t2item160}</td>
+                    <td>{grade.t2item170}</td>
+                    <td>{grade.t2item180}</td>
+                    <td>{grade.t2item190}</td>
+                  </tr>
+                ) : (
+                  <></>
+                )}
+              </tbody>
+            );
+          })}
+        </table>
+      </div>
+    </div>
   );
-}
+};
 
 export default Grades;

@@ -16,7 +16,7 @@ import SignUp from "./pages/SignUp";
 import { database } from "./firebase";
 import { get, ref, onValue } from "firebase/database";
 import Grades from "./pages/Grades/Grades";
-import { Table } from "react-bootstrap";
+import Students from "./pages/Students/Students";
 
 function App() {
   const AUTO_LOGOUT_TIME = 60 * 30 * 1000; // 30 min
@@ -35,6 +35,8 @@ function App() {
   const [inputPasscode, setInputPasscode] = useState("");
   const [matchingId, setMatchingId] = useState(null);
   const [matchingPasscode, setMatchingPasscode] = useState(null);
+  const [showLogin, setShowLogin] = useState(true);
+  const [showTable, setShowTable] = useState(false);
 
   useEffect(() => {
     // Reference to your database path
@@ -55,8 +57,6 @@ function App() {
         setGrades(Object.values(fetchedData));
       }
     });
-
-    console.log("THE DATA IS ", data);
 
     return () => {
       // Unsubscribe the event listener when component unmounts
@@ -167,6 +167,15 @@ function App() {
 
     setMatchingId(foundId);
     setMatchingPasscode(foundPasscode);
+    setShowLogin(false);
+    setShowTable(true);
+  };
+
+  const handleSearch = () => {
+    setShowLogin(true);
+    setShowTable(false);
+    setInputId("");
+    setInputPasscode("");
   };
 
   console.log({ data });
@@ -174,7 +183,7 @@ function App() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+      {/* <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <div className="container-fluid">
           <div className="logo" style={{ position: "absolute", top: "1px" }}>
             <img
@@ -216,14 +225,8 @@ function App() {
                 <>
                   {isApproved && (
                     <>
-                      {/* <Link to="/posts" className="nav-link">
-                        Post
-                      </Link> */}
                       {isAdmin && (
                         <>
-                          {/* <Link to="/createpost" className="nav-link">
-                            Create Post
-                          </Link> */}
                           <Link to="/admindashboard" className="nav-link">
                             Admin
                           </Link>
@@ -247,7 +250,7 @@ function App() {
             </div>
           </div>
         </div>
-      </nav>
+      </nav> */}
       <ToastContainer />
       {isAuth ? (
         <>
@@ -261,20 +264,6 @@ function App() {
                 element={<Posts isAuth={isAuth} isAdmin={isAdmin} />}
               />
               <Route path="/view" element={<ViewPost />} />
-              {/* {isAdmin ? (
-                <>
-                  <Route
-                    path="/createpost"
-                    element={<CreatePost isAuth={isAuth} />}
-                  />
-                  <Route
-                    path="/admindashboard"
-                    element={<Admin isAuth={isAuth} />}
-                  />
-                </>
-              ) : (
-                <Route path="/createpost" element={<Unauthorized />} />
-              )} */}
             </Routes>
           ) : (
             <Routes>
@@ -299,43 +288,7 @@ function App() {
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         </Routes>
       )}
-      <div className="d-flex justify-content-center">
-        <div
-          className="p-4 mt-4"
-          style={{
-            background: "#fff",
-            border: "1px solid #fff",
-            borderRadius: "8px",
-            boxShadow: "2px 2px 10px -1px #b9b3b3",
-          }}
-        >
-          <p className="text-center">Enter your ID and Passcode</p>
-          <input
-            className="text-center"
-            type="text"
-            value={inputId}
-            onChange={handleInputId}
-            placeholder="Your ID"
-          />
-          <input
-            className="text-center"
-            type="text"
-            value={inputPasscode}
-            onChange={handleInputPasscode}
-            placeholder="Your Passcode"
-          />
-          <button
-            className="btn-primary border-0 text-white text-center mt-4"
-            onClick={handleButtonClick}
-          >
-            Check Input
-          </button>
-        </div>
-      </div>
-      {matchingId !== undefined &&
-      matchingId !== null &&
-      matchingPasscode !== undefined &&
-      matchingPasscode !== null ? (
+      {showLogin && (
         <div className="d-flex justify-content-center">
           <div
             className="p-4 mt-4"
@@ -346,77 +299,53 @@ function App() {
               boxShadow: "2px 2px 10px -1px #b9b3b3",
             }}
           >
-            <div className="d-flex justify-content-end">
-              <div>
-                <div>
-                  <p>
-                    <strong>{data[0].t1key110}:&nbsp;</strong>
-                    <span>{matchingId.t1key110}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <strong>{data[0].t1item120}:&nbsp;</strong>
-                    <span>{matchingId.t1item120}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <strong>{data[0].t1item130}:&nbsp;</strong>
-                    <span>{matchingId.t1item130}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <strong>{data[0].t1item140}:&nbsp;</strong>
-                    <span>{matchingId.t1item140}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <strong>{data[0].t1item150}:&nbsp;</strong>
-                    <span>{matchingId.t1item150}</span>
-                    {matchingId.t1key112}
-                  </p>
-                </div>
-              </div>
+            <p className="text-center">Enter your ID and Passcode</p>
+            <input
+              className="text-center"
+              type="text"
+              value={inputId}
+              onChange={handleInputId}
+              placeholder="Your ID"
+            />
+            <input
+              className="text-center"
+              type="text"
+              value={inputPasscode}
+              onChange={handleInputPasscode}
+              placeholder="Your Passcode"
+            />
+            <button
+              className="btn-primary border-0 text-white text-center mt-4"
+              onClick={handleButtonClick}
+            >
+              Show grades
+            </button>
+          </div>
+        </div>
+      )}
+      {showTable &&
+      matchingId !== undefined &&
+      matchingId !== null &&
+      matchingPasscode !== undefined &&
+      matchingPasscode !== null ? (
+        <div >
+          <div
+            className="p-4 mt-4"
+            style={{
+              background: "#fff",
+              border: "1px solid #fff",
+              borderRadius: "8px",
+              boxShadow: "2px 2px 10px -1px #b9b3b3",
+            }}
+          >
+            
+            {/* this is for the top part */}
+            <Students matchingId={matchingId} data={data} />
+            <div>
+              <button style={{border: 'none',padding: '10px 15px'}} onClick={handleSearch}>Sign out</button>
             </div>
-            <div className="mt-4">
-              <Table responsive="md" striped bordered hover size="sm">
-                <thead>
-                  <tr style={{ fontSize: "16px", color: "#777" }}>
-                    <th style={{ color: "#777" }}>{grades[0].t2item110}</th>
-                    <th style={{ color: "#777" }}>{grades[0].t2item130}</th>
-                    <th style={{ color: "#777" }}>{grades[0].t2item140}</th>
-                    <th style={{ color: "#777" }}>{grades[0].t2item150}</th>
-                    <th style={{ color: "#777" }}>{grades[0].t2item160}</th>
-                    <th style={{ color: "#777" }}>{grades[0].t2item170}</th>
-                    <th style={{ color: "#777" }}>{grades[0].t2item180}</th>
-                    <th style={{ color: "#777" }}>{grades[0].t2item190}</th>
-                  </tr>
-                </thead>
-                {grades.slice(2).map((grade) => {
-                  return (
-                    <tbody>
-                      {grade.t2key120 === matchingId.t1key110 ? (
-                        <tr style={{ fontSize: "15px" }}>
-                          <td>{grade.t2item110}</td>
-                          <td>{grade.t2item130}</td>
-                          <td>{grade.t2item140}</td>
-                          <td>{grade.t2item150}</td>
-                          <td>{grade.t2item160}</td>
-                          <td>{grade.t2item170}</td>
-                          <td>{grade.t2item180}</td>
-                          <td>{grade.t2item190}</td>
-                        </tr>
-                      ) : (
-                        <></>
-                      )}
-                    </tbody>
-                  );
-                })}
-              </Table>
-            </div>
+            {/* this is for the table part */}
+            <Grades matchingId={matchingId} grades={grades} />
           </div>
         </div>
       ) : (

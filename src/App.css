@@ -629,3 +629,19 @@ nav {
   color: #4bd4ec;
   transform: scale(1.1);
 }
+
+.table-tr th, .table-tbody td{
+  padding: 5px !important;
+  border: 1px solid #000;
+}
+
+.table-tbody td{
+font-size: 15px;
+}
+
+.table-tr th{
+  font-weight: bold;
+  color: #302e2e;
+}
+
+
