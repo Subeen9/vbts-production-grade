@@ -71,6 +71,7 @@ function CreatePost(props) {
     }
 
     if (Object.keys(error).length === 0) {
+      
       await addDoc(postCollectionRef, {
         title,
         postText,

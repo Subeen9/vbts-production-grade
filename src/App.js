@@ -37,6 +37,9 @@ function App() {
   const [matchingPasscode, setMatchingPasscode] = useState(null);
   const [showLogin, setShowLogin] = useState(true);
   const [showTable, setShowTable] = useState(false);
+  const [saveData, setSaveData] = useState(false);
+
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     // Reference to your database path
@@ -178,8 +181,22 @@ function App() {
     setInputPasscode("");
   };
 
+  const handleEdit = () => {
+    setIsEdit(!isEdit);
+    if(isEdit){
+      setSaveData(true);
+    }
+    // if (isEdit) {
+    //     if (saveData)
+    //       set(ref(database, "vbts/updatedData" + userId), {
+    //         updatedData,
+    //       });
+      
+    // }
+  };
+
   console.log({ data });
-  console.log({ grades });
+  console.log({ "this is the grades": grades });
 
   return (
     <>
@@ -328,7 +345,7 @@ function App() {
       matchingId !== null &&
       matchingPasscode !== undefined &&
       matchingPasscode !== null ? (
-        <div >
+        <div>
           <div
             className="p-4 mt-4"
             style={{
@@ -338,14 +355,31 @@ function App() {
               boxShadow: "2px 2px 10px -1px #b9b3b3",
             }}
           >
-            
             {/* this is for the top part */}
-            <Students matchingId={matchingId} data={data} />
+            <Students
+              matchingId={matchingId}
+              data={data}
+              isEdit={isEdit}
+              saveData={saveData}
+            />
             <div>
-              <button style={{border: 'none',padding: '10px 15px'}} onClick={handleSearch}>Sign out</button>
+              <button
+                className={isEdit ? "btn btn-success" : "btn btn-info"}
+                style={{ border: "none", padding: "10px 15px" }}
+                onClick={handleEdit}
+              >
+                {isEdit ? "Save Data" : "Edit Data"}
+              </button>{" "}
+              &nbsp;
+              <button
+                style={{ border: "none", padding: "10px 15px" }}
+                onClick={handleSearch}
+              >
+                Sign out
+              </button>
             </div>
             {/* this is for the table part */}
-            <Grades matchingId={matchingId} grades={grades} />
+            <Grades matchingId={matchingId} grades={grades} isEdit={isEdit} />
           </div>
         </div>
       ) : (

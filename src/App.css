@@ -61,6 +61,11 @@ a {
   flex-direction: column;
 }
 
+.pointer-cursor {
+  cursor: pointer;
+  color: rgb(199, 137, 22);
+}
+
 .cpContainer h1 {
   text-align: center;
 }
