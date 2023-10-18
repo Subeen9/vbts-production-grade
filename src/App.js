@@ -22,7 +22,8 @@ function App() {
   const AUTO_LOGOUT_TIME = 60 * 30 * 1000; // 30 min
   const [isAuth, setIsAuth] = useState(() => {
     const storedAuth = localStorage.getItem("isAuth");
-    return storedAuth ? JSON.parse(storedAuth) : false;
+    return storedAuth ? JSON.parse(storedAuth) : false
+    ;
   });
   const [isAdmin, setisAdmin] = useState(false);
   const [isApproved, setIsApproved] = useState(true);
@@ -347,7 +348,7 @@ function App() {
       matchingPasscode !== null ? (
         <div>
           <div
-            className="p-4 mt-4"
+            className=""
             style={{
               background: "#fff",
               border: "1px solid #fff",
@@ -363,17 +364,20 @@ function App() {
               saveData={saveData}
               setSaveData={setSaveData}
             />
-            <div>
+            <div className="studentpage-btn">
+              <span className="btn-edit">
               <button
                 className={isEdit ? "btn btn-success" : "btn btn-info"}
-                style={{ border: "none", padding: "10px 15px" }}
+                style={{ border: "none", padding: "4px 4px" }}
                 onClick={handleEdit}
               >
                 {isEdit ? "Save Data" : "Edit Data"}
               </button>{" "}
               &nbsp;
+              </span>
               <button
-                style={{ border: "none", padding: "10px 15px" }}
+              className="btn-signout"
+                style={{ border: "none", padding: "5x 5px" }}
                 onClick={handleSearch}
               >
                 Sign out

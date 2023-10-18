@@ -1,0 +1,102 @@
+*body{
+  background-color: #f8f8f8;
+}
+
+.Student-form {
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Center vertically on the screen */
+}
+
+.form-box {
+  width: 500px;
+  border: 8px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+}
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+  
+  }
+  .form-heading{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 300px;
+    background-color: #f8f8f8;
+  }
+  
+  .form-border{
+    border: none;
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+  
+  }
+  .form-heading{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 10px
+  }
+
+  
+  .form-border{
+    border: none;
+  }
+
+ 
+  .form-control{
+    width: 250px;
+    border: none;
+    font-weight: bold;
+
+  }
+  .form-label{
+   padding: 0px;
+    margin-right: 20px;
+    margin-bottom: 0;
+    width: 80px;
+    display: inline-block;
+    font-weight: bold;
+  
+  }
+  .main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding:0px;
+    
+
+  }
+   
+  
+  .main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding:0px;
+    
+  
+  }
+  .editable{
+    color: black;
+    width: 250px;
+    font-weight: bold; 
+    border: solid 3px;
+  }
+  
