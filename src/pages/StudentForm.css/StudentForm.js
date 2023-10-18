@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import './Students.css';
+import './StudentForm.css';
 import {FaUserTie} from "react-icons/fa";
 import { FaPencilAlt } from 'react-icons/fa';
 import {FaUniversity} from 'react-icons/fa';
