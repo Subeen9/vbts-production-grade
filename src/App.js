@@ -361,6 +361,7 @@ function App() {
               data={data}
               isEdit={isEdit}
               saveData={saveData}
+              setSaveData={setSaveData}
             />
             <div>
               <button

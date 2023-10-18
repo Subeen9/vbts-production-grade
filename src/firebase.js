@@ -26,7 +26,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig, {
+  experimentalForceLongPolling: true, // this line
+  useFetchStreams: false,
+});
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider(); //for google signin
