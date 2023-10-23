@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import "./Students.css";
 import {
   FaUserTie,
@@ -12,8 +12,7 @@ import {
 import { database, db } from "../../firebase";
 import { ref, set } from "firebase/database";
 
-
-const Students = ({ matchingId, data, handleLogOut}) => {
+const Students = ({ matchingId, data, handleLogOut }) => {
   const [t1key110, sett1key110] = useState(matchingId.t1key110);
   const [t1item120, setName] = useState(matchingId.t1item120);
   const [t1item130, setProgram] = useState(matchingId.t1item130);
@@ -24,6 +23,7 @@ const Students = ({ matchingId, data, handleLogOut}) => {
   const [isEdit, setIsEdit] = useState(false);
 
   let isEditing = false;
+
   if (saveData) {
     set(ref(database, `vbts/updatedData/${t1key110}`), {
       t1key110: t1key110,
@@ -43,54 +43,84 @@ const Students = ({ matchingId, data, handleLogOut}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (isEditing) {
-      saveData();
-      console.log("DATA SAVED")
-    }
+
+    console.log("submit button is clicked");
   };
   try {
-    var time = t1item160.slice(0,10) + " :" + t1item160.slice(11,16)
-    
+    var time = t1item160.slice(0, 10) + " :" + t1item160.slice(11, 16);
   } catch (error) {
     console.log(error);
   }
   const handleEdit = () => {
     setIsEdit(!isEdit);
-    if(isEdit){
+    if (isEdit) {
       setSaveData(true);
     }
-    
-  }
-  
+  };
+
   return (
     <>
       <div className="form-heading">
         <h2>Student Registration </h2>
         <button
-        type="button"
+          type="button"
           className="btn btn-danger "
-          style={{padding:"7px",position:"absolute",top:"15px",right:"15px"}}
+          style={{
+            padding: "7px",
+            position: "absolute",
+            top: "15px",
+            right: "15px",
+          }}
           onClick={handleLogOut}
         >
           Sign out
         </button>
       </div>
       <div className="Student-form">
-        <div className="form-box">
-          <Form onSubmit={handleSubmit} className="main">
-            <FaUserTie />
-            <Form.Label className="form-label">{data[0].t1key110}</Form.Label>
-            <Form.Control
-              className="form-control"
-              type="text"
-              value={t1key110}
-              readOnly
-              onChange={(event) => {
-                sett1key110(event.target.value);
-              }}
-            />
-          </Form>
-          <Form onSubmit={handleSubmit} className="main">
+        <div>
+          <Form onSubmit={handleSubmit} >
+            <Form.Group
+              as={Row}
+              className="mb-3"
+              controlId="formPlaintextEmail"
+            >
+              <Form.Label
+                className="form-label"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <FaUserTie />
+                {data[0].t1key110}
+              </Form.Label>
+              <Form.Control
+                className="form-control"
+                type="text"
+                value={t1key110}
+                readOnly
+                onChange={(event) => {
+                  sett1key110(event.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group>
+              <FaUserTie />
+              <Form.Label className="form-label">{data[0].t1key110}</Form.Label>
+
+              <Form.Control
+                className="form-control"
+                type="text"
+                value={t1key110}
+                readOnly
+                onChange={(event) => {
+                  sett1key110(event.target.value);
+                }}
+              />
+            </Form.Group>
+            asdsa
+            <br />
             <FaPencilAlt />
             <Form.Label className="form-label">{data[0].t1item120}</Form.Label>
             <Form.Control
@@ -102,8 +132,6 @@ const Students = ({ matchingId, data, handleLogOut}) => {
               }}
               readOnly={!isEdit}
             />
-          </Form>
-          <Form onSubmit={handleSubmit} className="main">
             <FaUniversity />
             <Form.Label className="form-label">{data[0].t1item130}</Form.Label>
             <Form.Control
@@ -115,8 +143,6 @@ const Students = ({ matchingId, data, handleLogOut}) => {
               }}
               readOnly={!isEdit}
             />
-          </Form>
-          <Form onSubmit={handleSubmit} className="main">
             <FaPhone />
             <Form.Label className="form-label">{data[0].t1item140}</Form.Label>
             <Form.Control
@@ -128,10 +154,7 @@ const Students = ({ matchingId, data, handleLogOut}) => {
               }}
               readOnly={!isEdit}
             />
-          </Form>
-          <Form onSubmit={handleSubmit} className="main">
             <FaEnvelopeOpen />
-
             <Form.Label className="form-label">{data[0].t1item150}</Form.Label>
             <Form.Control
               className={isEdit ? "editable" : "form-control"}
@@ -142,8 +165,6 @@ const Students = ({ matchingId, data, handleLogOut}) => {
               }}
               readOnly={!isEdit}
             />
-          </Form>
-          <Form onSubmit={handleSubmit} className="main ">
             <FaRegCalendarTimes />
             <Form.Label className="form-label">{data[0].t1item160}</Form.Label>
             <Form.Control
@@ -159,14 +180,14 @@ const Students = ({ matchingId, data, handleLogOut}) => {
         </div>
       </div>
       <div className="editButton">
-      <button
-                className={isEdit ? "btn btn-success" : "btn btn-info"}
-                style={{ border: "none", padding: "4px 4px" }}
-                onClick={handleEdit}
-              >
-                {isEdit ? "Save Data" : "Edit Data"}
-              </button>{" "}
-              </div>
+        <button
+          className={isEdit ? "btn btn-success" : "btn btn-info"}
+          style={{ border: "none", padding: "4px 4px" }}
+          type="submit"
+        >
+          {isEdit ? "Save Data" : "Edit Data"}
+        </button>{" "}
+      </div>
     </>
   );
 };
