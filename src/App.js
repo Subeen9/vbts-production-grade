@@ -175,7 +175,7 @@ function App() {
     setShowTable(true);
   };
 
-  const handleSearch = () => {
+  const handleLogOut = () => {
     setShowLogin(true);
     setShowTable(false);
     setInputId("");
@@ -363,6 +363,7 @@ function App() {
               isEdit={isEdit}
               saveData={saveData}
               setSaveData={setSaveData}
+              logout={handleLogOut}
             />
             <div className="studentpage-btn">
               <span className="btn-edit">
@@ -375,13 +376,7 @@ function App() {
               </button>{" "}
               &nbsp;
               </span>
-              <button
-              className="btn-signout"
-                style={{ border: "none", padding: "5x 5px" }}
-                onClick={handleSearch}
-              >
-                Sign out
-              </button>
+             
             </div>
             {/* this is for the table part */}
             <Grades matchingId={matchingId} grades={grades} isEdit={isEdit} />
