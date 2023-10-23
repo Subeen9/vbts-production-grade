@@ -175,26 +175,27 @@ function App() {
     setShowTable(true);
   };
 
-  const handleLogOut = () => {
+   const handleLogOut = () => {
+    console.log("function called")
     setShowLogin(true);
     setShowTable(false);
     setInputId("");
     setInputPasscode("");
   };
 
-  const handleEdit = () => {
-    setIsEdit(!isEdit);
-    if(isEdit){
-      setSaveData(true);
-    }
-    // if (isEdit) {
-    //     if (saveData)
-    //       set(ref(database, "vbts/updatedData" + userId), {
-    //         updatedData,
-    //       });
+  // const handleEdit = () => // moved to student.js
+  //   setIsEdit(!isEdit);
+  //   if(isEdit){
+  //     setSaveData(true);
+  //   }
+  //   // if (isEdit) {
+  //   //     if (saveData)
+  //   //       set(ref(database, "vbts/updatedData" + userId), {
+  //   //         updatedData,
+  //   //       });
       
-    // }
-  };
+  //   // }
+  // };
 
   console.log({ data });
   console.log({ "this is the grades": grades });
@@ -363,21 +364,9 @@ function App() {
               isEdit={isEdit}
               saveData={saveData}
               setSaveData={setSaveData}
-              logout={handleLogOut}
+              handleLogOut={handleLogOut}
             />
-            <div className="studentpage-btn">
-              <span className="btn-edit">
-              <button
-                className={isEdit ? "btn btn-success" : "btn btn-info"}
-                style={{ border: "none", padding: "4px 4px" }}
-                onClick={handleEdit}
-              >
-                {isEdit ? "Save Data" : "Edit Data"}
-              </button>{" "}
-              &nbsp;
-              </span>
-             
-            </div>
+           
             {/* this is for the table part */}
             <Grades matchingId={matchingId} grades={grades} isEdit={isEdit} />
           </div>
@@ -390,3 +379,4 @@ function App() {
 }
 
 export default App;
+

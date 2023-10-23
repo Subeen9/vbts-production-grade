@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import imageLogo from "../../images/logo.png";
-import { database, db } from "../../firebase";
-import { ref, set } from "firebase/database";
+// import { database, db } from "../../firebase";
+// import { ref, set } from "firebase/database";
 
 const Students = ({ matchingId, data, isEdit, saveData }) => {
   const [t1key110, sett1key110] = useState(matchingId.t1key110);
@@ -12,20 +12,20 @@ const Students = ({ matchingId, data, isEdit, saveData }) => {
   const [t1item160, setRegistrationDate] = useState(matchingId.t1item160);
   const editMode = isEdit ? "pointer-cursor" : "";
 
-  if (saveData) {
-    set(ref(database, `vbts/updatedData/${t1key110}`), {
-      t1key110: t1key110,
-      t1item120: t1item120,
-      t1item130: t1item130,
-      t1item140: t1item140,
-      t1item150: t1item150,
-    })
-      .catch((e) => {
-        console.log("SAVING ERROR", e);
-      })
-      .then(() => console.log("DATA POSTED SUCCESSFULLY"));
-    console.log("DATA SAVED");
-  }
+  // if (saveData) {
+  //   set(ref(database, `vbts/updatedData/${t1key110}`), {
+  //     t1key110: t1key110,
+  //     t1item120: t1item120,
+  //     t1item130: t1item130,
+  //     t1item140: t1item140,
+  //     t1item150: t1item150,
+  //   })
+  //     .catch((e) => {
+  //       console.log("SAVING ERROR", e);
+  //     })
+  //     .then(() => console.log("DATA POSTED SUCCESSFULLY"));
+  //   console.log("DATA SAVED");
+  // }
 
   return (
     <div>

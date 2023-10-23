@@ -95,3 +95,7 @@
     color: rgb(212, 145, 37);
     width: 250px;
   }
+  .editButton{
+    display: flex;
+    justify-content: center;
+  }
