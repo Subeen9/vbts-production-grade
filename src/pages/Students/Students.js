@@ -20,12 +20,10 @@ const Students = ({ matchingId, data, handleLogOut }) => {
   const [t1item150, setEmail] = useState(matchingId.t1item150);
   const [t1item160, setRegistrationDate] = useState(matchingId.t1item160);
   const [saveData, setSaveData] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
-
-  let isEditing = false;
+  const [isEditing, setIsEdit] = useState(false);
 
   if (saveData) {
-    set(ref(database, `vbts/updatedData/${t1key110}`), {
+    set(ref(database, `vbts/updated Data/${t1key110}`), {
       t1key110: t1key110,
       t1item120: t1item120,
       t1item130: t1item130,
@@ -43,17 +41,37 @@ const Students = ({ matchingId, data, handleLogOut }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log("submit button is clicked");
+    if (!isEditing) {
+      setIsEdit(!isEditing);
+    } else if (isEditing) {
+       set(ref(database, `vbts/updatedData/`), 
+       [{
+        
+       },{
+      t1key110: t1key110,
+      t1item120: t1item120,
+      t1item130: t1item130,
+      t1item140: t1item140,
+      t1item150: t1item150,
+    }
+  ]
+    )
+      .catch((e) => {
+        console.log("SAVING ERROR", e);
+      })
+      .then(() => console.log("DATA POSTED SUCCESSFULLY"));
+     setIsEdit(!isEditing);
+    }
   };
+
   try {
     var time = t1item160.slice(0, 10) + " :" + t1item160.slice(11, 16);
   } catch (error) {
     console.log(error);
   }
   const handleEdit = () => {
-    setIsEdit(!isEdit);
-    if (isEdit) {
+    setIsEdit(!isEditing);
+    if (isEditing) {
       setSaveData(true);
     }
   };
@@ -78,7 +96,7 @@ const Students = ({ matchingId, data, handleLogOut }) => {
       </div>
       <div className="Student-form">
         <div>
-          <Form onSubmit={handleSubmit} >
+          <Form onSubmit={handleSubmit}>
             <Form.Group
               as={Row}
               className="mb-3"
@@ -124,46 +142,46 @@ const Students = ({ matchingId, data, handleLogOut }) => {
             <FaPencilAlt />
             <Form.Label className="form-label">{data[0].t1item120}</Form.Label>
             <Form.Control
-              className={isEdit ? "editable" : "form-control"}
+              className={isEditing ? "editable" : "form-control"}
               type="text"
               value={t1item120}
               onChange={(event) => {
                 setName(event.target.value);
               }}
-              readOnly={!isEdit}
+              readOnly={!isEditing}
             />
             <FaUniversity />
             <Form.Label className="form-label">{data[0].t1item130}</Form.Label>
             <Form.Control
-              className={isEdit ? "editable" : "form-control"}
+              className={isEditing ? "editable" : "form-control"}
               type="text"
               value={t1item130}
               onChange={(event) => {
                 setProgram(event.target.value);
               }}
-              readOnly={!isEdit}
+              readOnly={!isEditing}
             />
             <FaPhone />
             <Form.Label className="form-label">{data[0].t1item140}</Form.Label>
             <Form.Control
-              className={isEdit ? "editable" : "form-control"}
+              className={isEditing ? "editable" : "form-control"}
               type="text"
               value={t1item140}
               onChange={(event) => {
                 setPhone(event.target.value);
               }}
-              readOnly={!isEdit}
+              readOnly={!isEditing}
             />
             <FaEnvelopeOpen />
             <Form.Label className="form-label">{data[0].t1item150}</Form.Label>
             <Form.Control
-              className={isEdit ? "editable" : "form-control"}
+              className={isEditing ? "editable" : "form-control"}
               type="text"
               value={t1item150}
               onChange={(event) => {
                 setEmail(event.target.value);
               }}
-              readOnly={!isEdit}
+              readOnly={!isEditing}
             />
             <FaRegCalendarTimes />
             <Form.Label className="form-label">{data[0].t1item160}</Form.Label>
@@ -176,17 +194,17 @@ const Students = ({ matchingId, data, handleLogOut }) => {
                 setRegistrationDate(event.target.value);
               }}
             />
+            <div className="editButton">
+              <button
+                className={isEditing ? "btn btn-success" : "btn btn-info"}
+                style={{ border: "none", padding: "4px 4px" }}
+                type="submit"
+              >
+                {isEditing ? "Save Data" : "Edit Data"}
+              </button>
+            </div>
           </Form>
         </div>
-      </div>
-      <div className="editButton">
-        <button
-          className={isEdit ? "btn btn-success" : "btn btn-info"}
-          style={{ border: "none", padding: "4px 4px" }}
-          type="submit"
-        >
-          {isEdit ? "Save Data" : "Edit Data"}
-        </button>{" "}
       </div>
     </>
   );
